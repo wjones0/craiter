@@ -38,9 +38,9 @@ function processUser(user, saveCallBack) {
       if (err) throw err;
 
       for (var j = 0; j < articles.length; j++) {
-        console.log(articles[j].link);
+        // console.log(articles[j].link);
         if (jsonString.indexOf(articles[j].link) > -1) {
-          console.log("your key or value exists!");
+          // console.log("your key or value exists!");
         } else {
           user.posts.push({"url":articles[j].link});
           tweet(user.username, searchparam.name, articles[j]);
@@ -65,7 +65,7 @@ function tweet(username, searchname, post)
     });
        
     var dmText = searchname + ": " + post.link;
-       
+    console.log("tweeting " + username);
     client.post('direct_messages/new', {screen_name: username, text: dmText},  function(error, tweet, response){
       if(error) throw error;
       // console.log(tweet);  // Tweet body. 
