@@ -29,7 +29,7 @@ function processUser(user, saveCallBack) {
           tweet(user.username, searchparam.name, articles[j]);
         }
       }
-        console.log(user.posts);
+        // console.log(user.posts);
         saveCallBack(user);
         // save user
     });
