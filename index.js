@@ -36,7 +36,7 @@ function processUser(user, saveCallBack) {
     
     feed(searchparam.search, function (err, articles) {
       if (err) throw err;
-
+      console.log(user.username + " " + articles.count + " posts total");
       for (var j = 0; j < articles.length; j++) {
         // console.log(articles[j].link);
         if (jsonString.indexOf(articles[j].link) > -1) {
@@ -94,6 +94,8 @@ MongoClient.connect(url, function (err, db) {
         db.close();
         return;
       }
+
+      console.log("Users to process: " + count);
 
       var saveFinished = function(){
         savesPending--;
