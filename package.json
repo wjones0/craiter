@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mongodb": "^2.0.39"
+    "feed-read": "git://github.com/wjones0/feed-read.git",
+    "mongodb": "^2.0.39",
+    "twitter": "^1.2.5"
   }
 }
