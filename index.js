@@ -15,7 +15,7 @@ config.twitter.access_token_secret = process.env.TWITTOKENSEC;
 	  
 	  
 config.mongodb = {};
-config.mongodb.connection =  MONGOCONN;
+config.mongodb.connection =  process.env.MONGOCONN;
 
 
 
