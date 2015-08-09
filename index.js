@@ -1,21 +1,21 @@
-var config = require('./config');
+// var config = require('./config');
 var mongodb = require('mongodb');
 var feed = require("feed-read");
 var Twitter = require('twitter');
 
 
 
-// var config = {};
-// 
-// config.twitter = {};
-// config.twitter.consumer_key = process.env.TWITCONSUMERKEY;
-// config.twitter.consumer_secret = process.env.TWITCONSUMERSECRET;
-// config.twitter.access_token_key = process.env.TWITTOKENKEY;
-// config.twitter.access_token_secret = process.env.TWITTOKENSEC;
-// 	  
-// 	  
-// config.mongodb = {};
-// config.mongodb.connection =  process.env.MONGOCONN;
+var config = {};
+
+config.twitter = {};
+config.twitter.consumer_key = process.env.TWITCONSUMERKEY;
+config.twitter.consumer_secret = process.env.TWITCONSUMERSECRET;
+config.twitter.access_token_key = process.env.TWITTOKENKEY;
+config.twitter.access_token_secret = process.env.TWITTOKENSEC;
+	  
+	  
+config.mongodb = {};
+config.mongodb.connection =  process.env.MONGOCONN;
 
 
 
