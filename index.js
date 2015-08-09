@@ -45,25 +45,27 @@ function processUser(user, saveCallBack) {
     // console.log(user.search_strings[i].search);
     var jsonString = JSON.stringify(user.posts);
     
-    var searchparam = user.search_strings[i];
-    
-    feed(searchparam.search, function (err, articles) {
-      if (err) throw err;
-      console.log(user.username + " " + articles.length + " posts total");
-      for (var j = 0; j < articles.length; j++) {
-        // console.log(articles[j].link);
-        if (jsonString.indexOf(articles[j].link) > -1) {
-          // console.log("your key or value exists!");
-        } else {
-          new_posts.push({"url":articles[j].link});
-          tweet(user.username, searchparam.name, articles[j]);
+    (function() {
+      var searchparam = user.search_strings[i];
+      
+      feed(searchparam.search, function (err, articles) {
+        if (err) throw err;
+        console.log(user.username + " " + articles.length + " posts total");
+        for (var j = 0; j < articles.length; j++) {
+          // console.log(articles[j].link);
+          if (jsonString.indexOf(articles[j].link) > -1) {
+            // console.log("your key or value exists!");
+          } else {
+            new_posts.push({"url":articles[j].link});
+            tweet(user.username, searchparam.name, articles[j]);
+          }
         }
-      }
-        // console.log(user.posts);
-        // saveCallBack(user);
-        userSearchFinished();
-        // save user
-    });
+          // console.log(user.posts);
+          // saveCallBack(user);
+          userSearchFinished();
+          // save user
+      });
+    })();
   }
 
 }
