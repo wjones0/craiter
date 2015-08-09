@@ -1,21 +1,21 @@
-// var config = require('./config');
+var config = require('./config');
 var mongodb = require('mongodb');
 var feed = require("feed-read");
 var Twitter = require('twitter');
 
 
 
-var config = {};
-
-config.twitter = {};
-config.twitter.consumer_key = process.env.TWITCONSUMERKEY;
-config.twitter.consumer_secret = process.env.TWITCONSUMERSECRET;
-config.twitter.access_token_key = process.env.TWITTOKENKEY;
-config.twitter.access_token_secret = process.env.TWITTOKENSEC;
-	  
-	  
-config.mongodb = {};
-config.mongodb.connection =  process.env.MONGOCONN;
+// var config = {};
+// 
+// config.twitter = {};
+// config.twitter.consumer_key = process.env.TWITCONSUMERKEY;
+// config.twitter.consumer_secret = process.env.TWITCONSUMERSECRET;
+// config.twitter.access_token_key = process.env.TWITTOKENKEY;
+// config.twitter.access_token_secret = process.env.TWITTOKENSEC;
+// 	  
+// 	  
+// config.mongodb = {};
+// config.mongodb.connection =  process.env.MONGOCONN;
 
 
 
@@ -28,6 +28,19 @@ var url = config.mongodb.connection;
 
 function processUser(user, saveCallBack) {
 
+  var search_count = user.search_strings.length;
+  var new_posts = [];
+  
+  var userSearchFinished = function () {
+    search_count--;
+    if(search_count == 0)
+    {
+      user.posts.push.apply(user.posts,new_posts);
+      saveCallBack(user);
+    }
+  };
+  
+  
   for (var i = 0; i < user.search_strings.length; i++) {
     // console.log(user.search_strings[i].search);
     var jsonString = JSON.stringify(user.posts);
@@ -42,12 +55,13 @@ function processUser(user, saveCallBack) {
         if (jsonString.indexOf(articles[j].link) > -1) {
           // console.log("your key or value exists!");
         } else {
-          user.posts.push({"url":articles[j].link});
+          new_posts.push({"url":articles[j].link});
           tweet(user.username, searchparam.name, articles[j]);
         }
       }
         // console.log(user.posts);
-        saveCallBack(user);
+        // saveCallBack(user);
+        userSearchFinished();
         // save user
     });
   }
