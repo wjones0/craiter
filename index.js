@@ -29,6 +29,7 @@ var url = config.mongodb.connection;
 function processUser(user, saveCallBack) {
 
   var search_count = user.search_strings.length;
+  console.log(user.username + ":  " + user.search_strings.length + " searches total");
   var new_posts = [];
   
   var userSearchFinished = function () {
@@ -50,7 +51,7 @@ function processUser(user, saveCallBack) {
       
       feed(searchparam.search, function (err, articles) {
         if (err) throw err;
-        console.log(user.username + " " + articles.length + " posts total");
+        console.log(user.username + ": " + articles.length + " posts total");
         for (var j = 0; j < articles.length; j++) {
           // console.log(articles[j].link);
           if (jsonString.indexOf(articles[j].link) > -1) {
