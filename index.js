@@ -100,7 +100,7 @@ MongoClient.connect(url, function (err, db) {
     //HURRAY!! We are connected. :)
     console.log('Connection established to mongodb');
 
-    var collection = db.collection('creets');
+    var collection = db.collection('users');
 
     var cursor = collection.find();
     cursor.count(function(err,count) {
